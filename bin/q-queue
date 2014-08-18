@@ -12,9 +12,24 @@ q_help() {
   echo ""
 }
 
-if [ -z $@ ]; then
-  q_help
-  exit 1
-fi
+q_list() {
+  cat $qfile
+}
 
-echo "$PWD $@" >> $HOME/.q
+q_write() {
+  echo "$PWD $qcommand" >> $HOME/.q
+}
+
+qcommand="$@"
+qfile="$HOME/.q"
+
+if [ -z "$qcommand" ]; then
+  if [ -f "$qfile" ] && grep -iq " " $qfile; then
+    q_list
+  else
+    q_help
+    exit 1
+  fi
+else
+  q_write
+fi
