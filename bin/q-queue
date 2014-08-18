@@ -12,4 +12,9 @@ q_help() {
   echo ""
 }
 
-q_help
+if [ -z $@ ]; then
+  q_help
+  exit 1
+fi
+
+echo "$PWD $@" >> $HOME/.q

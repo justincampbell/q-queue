@@ -1,5 +1,6 @@
 setup() {
   QQ_TMPDIR=$BATS_TMPDIR/q-queue
+  HOME=$QQ_TMPDIR
   PATH=$QQ_STUBS:$PATH
 
   rm -rf $QQ_TMPDIR
