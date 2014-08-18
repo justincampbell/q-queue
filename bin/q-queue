@@ -1,3 +1,15 @@
 #!/usr/bin/env sh
 
-set -e
+set -euo pipefail
+IFS=$'\n\t'
+
+q_help() {
+  echo "q-queue v0.1.0"
+  echo "github.com/justincampbell/q-queue"
+  echo ""
+  echo "  Usage:"
+  echo "    q [COMMAND]  Queue command to run at a later time in this directory"
+  echo ""
+}
+
+q_help
