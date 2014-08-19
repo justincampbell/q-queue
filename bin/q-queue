@@ -17,14 +17,14 @@ q_list() {
 }
 
 q_write() {
-  echo "$PWD $qcommand" >> $HOME/.q
+  echo "$PWD	$qcommand" >> $HOME/.q
 }
 
 qcommand="$@"
 qfile="$HOME/.q"
 
 if [ -z "$qcommand" ]; then
-  if [ -f "$qfile" ] && grep -iq " " $qfile; then
+  if [ -f "$qfile" ] && grep -iq "	" $qfile; then
     q_list
   else
     q_help

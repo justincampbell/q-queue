@@ -11,11 +11,12 @@ load test_helper
   run $q foo
 
   [ $status -eq 0 ]
-  grep "$PWD foo" $HOME/.q
+  grep "^$PWD" $HOME/.q
+  grep "foo$" $HOME/.q
 }
 
 @test "q shows queued commands" {
-  echo "$PWD foo" > $HOME/.q
+  echo "$PWD	foo" > $HOME/.q
   run $q
 
   [ $status -eq 0 ]
