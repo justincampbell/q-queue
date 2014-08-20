@@ -16,6 +16,21 @@ q_list() {
   cat $qfile
 }
 
+q_run() {
+  cat $qfile | while read line; do
+    directory=$(echo $line | cut -f 1 -d " ")
+    command=$(echo $line | cut -f 2 -d " ")
+    args=$(echo $line | cut -f 3- -d " ")
+
+    echo $line
+    (cd $directory && $command $args)
+  done
+
+  rm -f $qfile
+
+  exit 0
+}
+
 q_write() {
   echo "$PWD	$qcommand" >> $HOME/.q
 }
@@ -29,18 +44,7 @@ if [ "$qcommand" = "-r" ]; then
     exit 1
   fi
 
-  cat $qfile | while read line; do
-    directory=$(echo $line | cut -f 1 -d " ")
-    command=$(echo $line | cut -f 2 -d " ")
-    args=$(echo $line | cut -f 3- -d " ")
-
-    echo $line
-    (cd $directory && $command $args)
-  done
-
-  rm -f $qfile
-
-  exit 0
+  q_run
 fi
 
 if [ -z "$qcommand" ]; then
