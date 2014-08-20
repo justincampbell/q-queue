@@ -7,20 +7,28 @@ load test_helper
   echo "$output" | grep "q-queue"
 }
 
+@test '`q` shows queued commands if commands are queued' {
+  echo "$PWD	foo" > $HOME/.q
+  run $q
+
+  [ $status -eq 0 ]
+  echo $output | grep "foo"
+}
+
+@test '`q -l` shows queued commands' {
+  echo "$PWD	foo" > $HOME/.q
+  run $q -l
+
+  [ $status -eq 0 ]
+  echo $output | grep "foo"
+}
+
 @test '`q foo` queues foo for later in ~/.q' {
   run $q foo
 
   [ $status -eq 0 ]
   grep "^$PWD" $HOME/.q
   grep "foo$" $HOME/.q
-}
-
-@test '`q` shows queued commands' {
-  echo "$PWD	foo" > $HOME/.q
-  run $q
-
-  [ $status -eq 0 ]
-  echo $output | grep "foo"
 }
 
 @test '`q -r` runs all queued commands' {

@@ -47,6 +47,11 @@ if [ "$qcommand" = "-r" ]; then
   q_run
 fi
 
+if [ "$qcommand" = "-l" ]; then
+  q_list
+  exit
+fi
+
 if [ -z "$qcommand" ]; then
   if [ -f "$qfile" ] && grep -iq "	" $qfile; then
     q_list
