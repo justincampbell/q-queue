@@ -24,6 +24,11 @@ qcommand="$@"
 qfile="$HOME/.q"
 
 if [ "$qcommand" = "-r" ]; then
+  if [ ! -f $qfile ]; then
+    echo "No commands queued"
+    exit 1
+  fi
+
   cat $qfile | while read line; do
     directory=$(echo $line | cut -f 1 -d " ")
     command=$(echo $line | cut -f 2 -d " ")

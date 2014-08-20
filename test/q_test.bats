@@ -35,3 +35,10 @@ load test_helper
   echo $output | grep $PWD
   verify_mocks
 }
+
+@test '`q -r` shows an error if no commands are queued' {
+  run $q -r
+
+  [ $status -eq 1 ]
+  echo $output | grep -i "no commands"
+}
