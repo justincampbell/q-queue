@@ -23,6 +23,21 @@ q_write() {
 qcommand="$@"
 qfile="$HOME/.q"
 
+if [ "$qcommand" = "-r" ]; then
+  cat $qfile | while read line; do
+    directory=$(echo $line | cut -f 1 -d " ")
+    command=$(echo $line | cut -f 2 -d " ")
+    args=$(echo $line | cut -f 3- -d " ")
+
+    echo $line
+    (cd $directory && $command $args)
+  done
+
+  rm -f $qfile
+
+  exit 0
+fi
+
 if [ -z "$qcommand" ]; then
   if [ -f "$qfile" ] && grep -iq "	" $qfile; then
     q_list
