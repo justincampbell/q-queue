@@ -2,6 +2,9 @@
 
 set -euo pipefail
 IFS=$'\n\t'
+OPTIND=1
+
+qfile="$HOME/.q"
 
 q_help() {
   echo "q-queue v0.1.0"
@@ -17,6 +20,11 @@ q_list() {
 }
 
 q_run() {
+  if [ ! -f $qfile ]; then
+    echo "No commands queued"
+    exit 1
+  fi
+
   cat $qfile | while read line; do
     directory=$(echo $line | cut -f 1 -d " ")
     command=$(echo $line | cut -f 2 -d " ")
@@ -35,22 +43,26 @@ q_write() {
   echo "$PWD	$qcommand" >> $HOME/.q
 }
 
+while getopts "hlr" opt; do
+  case "$opt" in
+    h)
+      q_help
+      exit
+      ;;
+    l)
+      q_list
+      exit
+      ;;
+    r)
+      q_run
+      exit
+      ;;
+  esac
+done
+
+shift $((OPTIND-1))
+
 qcommand="$@"
-qfile="$HOME/.q"
-
-if [ "$qcommand" = "-r" ]; then
-  if [ ! -f $qfile ]; then
-    echo "No commands queued"
-    exit 1
-  fi
-
-  q_run
-fi
-
-if [ "$qcommand" = "-l" ]; then
-  q_list
-  exit
-fi
 
 if [ -z "$qcommand" ]; then
   if [ -f "$qfile" ] && grep -iq "	" $qfile; then

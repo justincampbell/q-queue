@@ -50,3 +50,10 @@ load test_helper
   [ $status -eq 1 ]
   echo $output | grep -i "no commands"
 }
+
+@test '`q -z` shows an error and does not queue -z' {
+  run $q -z
+
+  [ $status -eq 1 ]
+  [ ! -f $HOME/.q ]
+}
