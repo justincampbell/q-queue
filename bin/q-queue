@@ -12,6 +12,9 @@ q_help() {
   echo ""
   echo "  Usage:"
   echo "    q [COMMAND]  Queue command to run at a later time in this directory"
+  echo "    q -h         Show this help"
+  echo "    q -l         List queued commands"
+  echo "    q -r         Run queued commands"
   echo ""
 }
 
