@@ -31,6 +31,19 @@ load test_helper
   grep "foo$" $HOME/.q
 }
 
+@test '`q foo` works with directories containing spaces' {
+  mkdir -p "bar baz" && cd "bar baz"
+  run ../$q foo
+
+  [ $status -eq 0 ]
+
+  mock "foo"
+
+  run ../$q -r
+
+  verify_mocks
+}
+
 @test '`q -r` runs all queued commands' {
   echo "$PWD	foo bar" > $HOME/.q
 

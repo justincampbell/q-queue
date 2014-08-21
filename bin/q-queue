@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 set -euo pipefail
-IFS=$'\n\t'
+IFS=$'\n'
 OPTIND=1
 
 qfile="$HOME/.q"
@@ -26,9 +26,9 @@ q_run() {
   fi
 
   cat $qfile | while read line; do
-    directory=$(echo $line | cut -f 1 -d " ")
-    command=$(echo $line | cut -f 2 -d " ")
-    args=$(echo $line | cut -f 3- -d " ")
+    directory=$(echo $line | cut -f 1)
+    command=$(echo $line | cut -f 2 | cut -f 1 -d " ")
+    args=$(echo $line | cut -f 2 | cut -f 2- -d " ")
 
     echo $line
     (cd $directory && $command $args)
