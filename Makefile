@@ -1,12 +1,12 @@
 HOMEPAGE=https://github.com/justincampbell/q-queue
 PREFIX=/usr/local
 
-VERSION=0.1.0
+VERSION=0.1.1
 TAG=v$(VERSION)
 
 ARCHIVE=q-queue-$(TAG).tar.gz
 ARCHIVE_URL=$(HOMEPAGE)/archive/$(TAG).tar.gz
-FILES=`find bin -type f`
+FILES=`find bin/*`
 
 export PATH := bin:$(PATH)
 
