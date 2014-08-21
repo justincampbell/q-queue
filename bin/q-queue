@@ -35,8 +35,6 @@ q_run() {
   done
 
   rm -f $qfile
-
-  exit 0
 }
 
 q_write() {
