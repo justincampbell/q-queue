@@ -62,13 +62,14 @@ shift $((OPTIND-1))
 
 qcommand="$@"
 
-if [ -z "$qcommand" ]; then
-  if [ -f "$qfile" ] && grep -iq "	" $qfile; then
-    q_list
-  else
-    q_help
-    exit 1
-  fi
-else
+if [ -n "$qcommand" ]; then
   q_write
+  exit
+fi
+
+if [ -f "$qfile" ] && grep -iq "	" $qfile; then
+  q_list
+else
+  q_help
+  exit 1
 fi
