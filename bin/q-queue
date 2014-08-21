@@ -16,7 +16,7 @@ q_help() {
 }
 
 q_list() {
-  cat $qfile
+  [ ! -f "$qfile" ] || cat $qfile
 }
 
 q_run() {

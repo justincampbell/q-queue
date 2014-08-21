@@ -23,6 +23,13 @@ load test_helper
   echo $output | grep "foo"
 }
 
+@test '`q -l` does nothing if no commands are queued' {
+  run $q -l
+
+  [ $status -eq 0 ]
+  [ -z "$output" ]
+}
+
 @test '`q foo` queues foo for later in ~/.q' {
   run $q foo
 
