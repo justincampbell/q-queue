@@ -31,10 +31,19 @@ q_run() {
   cat $qfile | while read line; do
     directory=$(echo $line | cut -f 1)
     command=$(echo $line | cut -f 2 | cut -f 1 -d " ")
-    args=$(echo $line | cut -f 2 | cut -f 2- -d " ")
+    args=""
+
+    if echo "$line" | grep " " > /dev/null; then
+      args=$(echo $line | cut -f 2 | cut -f 2- -d " ")
+    fi
 
     echo $line
-    (cd $directory && $command $args)
+
+    if [ -n "$args" ]; then
+      (cd $directory && $command $args)
+    else
+      (cd $directory && $command)
+    fi
   done
 
   rm -f $qfile
