@@ -77,3 +77,29 @@ load test_helper
   [ $status -eq 1 ]
   [ ! -f $HOME/.q ]
 }
+
+@test '`q -s` shows number of queued commands' {
+  echo "$PWD	foo bar" > $HOME/.q
+
+  run $q -s
+
+  [ $status -eq 0 ]
+  [ "$output" = "q-queue: You have 1 command queued" ]
+}
+
+@test '`q -s` pluralizes correctly' {
+  echo "$PWD	foo bar" > $HOME/.q
+  echo "$PWD	foo bar" >> $HOME/.q
+
+  run $q -s
+
+  [ $status -eq 0 ]
+  [ "$output" = "q-queue: You have 2 commands queued" ]
+}
+
+@test '`q -s` shows nothing if no commands are queued' {
+  run $q -s
+
+  [ $status -eq 0 ]
+  [ "$output" = "" ]
+}

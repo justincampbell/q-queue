@@ -15,6 +15,7 @@ q_help() {
   echo "    q -h         Show this help"
   echo "    q -l         List queued commands"
   echo "    q -r         Run queued commands"
+  echo "    q -s         Show number of queued commands, if any (put this in your profile)"
   echo ""
 }
 
@@ -49,11 +50,22 @@ q_run() {
   rm -f $qfile
 }
 
+q_status() {
+  if [ -f $qfile ]; then
+    local count=$(cat $qfile | wc -l | sed "s/[^0-9]//g;s/^$/-1/;")
+    local plural="s"
+    if [ $count == "1" ]; then
+      local plural=""
+    fi
+    echo "q-queue: You have $count command$plural queued"
+  fi
+}
+
 q_write() {
   echo "$PWD	$qcommand" >> $HOME/.q
 }
 
-while getopts "hlr" opt; do
+while getopts "hlrs" opt; do
   case "$opt" in
     h)
       q_help
@@ -65,6 +77,10 @@ while getopts "hlr" opt; do
       ;;
     r)
       q_run
+      exit
+      ;;
+    s)
+      q_status
       exit
       ;;
   esac

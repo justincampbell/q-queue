@@ -6,6 +6,7 @@
     -h         Show this help"
     -l         List queued commands"
     -r         Run queued commands"
+    -s         Show number of queued commands, if any (put this in your profile)
 
 # Examples
 
