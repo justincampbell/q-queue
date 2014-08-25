@@ -1,0 +1,7 @@
+language: c
+before_install:
+  - sudo apt-get install time -y
+before_script:
+  - git clone --depth 1 https://github.com/sstephenson/bats.git
+  - export PATH=$PATH:bats/bin
+script: make test

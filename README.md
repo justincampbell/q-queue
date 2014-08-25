@@ -1,4 +1,5 @@
 # q-queue
+[![Build Status](https://travis-ci.org/justincampbell/q-queue.svg?branch=master)](https://travis-ci.org/justincampbell/q-queue)
 
 # Options
 
