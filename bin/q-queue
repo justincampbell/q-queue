@@ -29,6 +29,9 @@ q_run() {
     exit 1
   fi
 
+  color=$(tput setaf 3) # yellow
+  reset=$(tput sgr0)
+
   cat $qfile | while read line; do
     directory=$(echo $line | cut -f 1)
     command=$(echo $line | cut -f 2 | cut -f 1 -d " ")
@@ -38,7 +41,7 @@ q_run() {
       args=$(echo $line | cut -f 2 | cut -f 2- -d " ")
     fi
 
-    echo $line
+    echo "$color$line$reset"
 
     if [ -n "$args" ]; then
       (cd "$directory" && $command $args)
