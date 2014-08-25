@@ -7,7 +7,7 @@ OPTIND=1
 qfile="$HOME/.q"
 
 q_help() {
-  echo "q-queue v0.2.0"
+  echo "q-queue v0.2.1"
   echo "github.com/justincampbell/q-queue"
   echo ""
   echo "  Usage:"
