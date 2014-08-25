@@ -84,7 +84,7 @@ load test_helper
   run $q -s
 
   [ $status -eq 0 ]
-  [ "$output" = "q-queue: You have 1 command queued" ]
+  echo $output | grep "1 command queued"
 }
 
 @test '`q -s` pluralizes correctly' {
@@ -94,12 +94,12 @@ load test_helper
   run $q -s
 
   [ $status -eq 0 ]
-  [ "$output" = "q-queue: You have 2 commands queued" ]
+  echo $output | grep "2 commands queued"
 }
 
 @test '`q -s` shows nothing if no commands are queued' {
   run $q -s
 
   [ $status -eq 0 ]
-  [ "$output" = "" ]
+  [ -z "$output" ]
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-set -euo pipefail
-IFS=$'\n'
+set -eu
+IFS=$' '
 OPTIND=1
 
 qfile="$HOME/.q"
@@ -41,9 +41,9 @@ q_run() {
     echo $line
 
     if [ -n "$args" ]; then
-      (cd $directory && $command $args)
+      (cd "$directory" && $command $args)
     else
-      (cd $directory && $command)
+      (cd "$directory" && $command)
     fi
   done
 
@@ -54,7 +54,7 @@ q_status() {
   if [ -f $qfile ]; then
     local count=$(cat $qfile | wc -l | sed "s/[^0-9]//g;s/^$/-1/;")
     local plural="s"
-    if [ $count == "1" ]; then
+    if [ $count -eq 1 ]; then
       local plural=""
     fi
     echo "q-queue: You have $count command$plural queued"
