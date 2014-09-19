@@ -1,7 +1,11 @@
+# v0.2.2
+
+* Fix multiple argument bug introduced in v0.2.1
+
 # v0.2.1
 
 * Color directory/command yellow when running
-* Fix bugs on Ubuntu (Justin Campbell)
+* Fix bugs on Ubuntu
 
 # v0.2.0
 

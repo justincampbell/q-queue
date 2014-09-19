@@ -1,7 +1,7 @@
 HOMEPAGE=https://github.com/justincampbell/q-queue
 PREFIX=/usr/local
 
-VERSION=0.2.1
+VERSION=0.2.2
 TAG=v$(VERSION)
 
 ARCHIVE=q-queue-$(TAG).tar.gz
