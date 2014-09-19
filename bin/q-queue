@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 set -eu
-IFS=$''
+IFS=$' '
 OPTIND=1
 
 qfile="$HOME/.q"

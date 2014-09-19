@@ -51,6 +51,13 @@ load test_helper
   verify_mocks
 }
 
+@test '`q ls -la .` works with multiple command arguments' {
+  run $q ls -la .
+  run $q -r
+
+  [ $status -eq 0 ]
+}
+
 @test '`q -r` runs all queued commands' {
   echo "$PWD	foo bar" > $HOME/.q
 
