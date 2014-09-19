@@ -10,7 +10,7 @@ setup() {
   mkdir -p $BATS_TMPDIR
   mkdir -p $BATS_STUBS
 
-  q=bin/q
+  q=$PWD/bin/q
 }
 
 teardown() {

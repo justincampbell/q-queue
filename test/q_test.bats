@@ -39,14 +39,14 @@ load test_helper
 }
 
 @test '`q foo` works with directories containing spaces' {
-  mkdir -p "bar baz" && cd "bar baz"
-  run ../$q foo
+  mkdir -p "$BATS_TMPDIR/bar baz" && cd "$BATS_TMPDIR/bar baz"
+  run $q foo
 
   [ $status -eq 0 ]
 
   mock "foo"
 
-  run ../$q -r
+  run $q -r
 
   verify_mocks
 }
